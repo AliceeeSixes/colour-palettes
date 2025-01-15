@@ -86,7 +86,7 @@ main {
     content: "No Colour Tiles Created";
     display: block;
     position: absolute;
-    height: 60vh;
+    height: 90%;
     width: 100%;
     text-align: center;
     align-content: center;
@@ -96,6 +96,7 @@ main {
   flex: 1 1 0;
   flex-basis: 15%;
   max-height: 100%;
+  min-width: 200px;
   position: relative;
   z-index: 2;
   display: flex; }
