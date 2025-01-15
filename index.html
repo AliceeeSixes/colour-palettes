@@ -13,27 +13,21 @@
 
 
 <body>
-    <div class="page-grid">
-        <div id="header" class="green">
+    <main>
+        <div id="header">
             <div id="header__inner">
-                <h1>Header Text</h1>
+                <h1>COLOUR PALETTE GENERATOR</h1>
             </div>
         </div>
-        <div class="blue">
-            <div id="main__container">
-                <div id="main__container-topbar">
-                </div>
-                <div id="main__container-contents">
-                </div>
-                <div id="main__container-bottombar">
-                    <button onclick="newColour(randomRGB())">Add New Random Colour</button>
-                    <button onclick="clearColours()">Clear All Colours</button>
-                </div>
+        <div id="main__container">
+            <div id="main__container-contents">
+            </div>
+            <div id="main__container-options">
+                <button onclick="newColour(randomRGB())">ADD NEW RANDOM COLOUR</button>
+                <button onclick="clearColours()">CLEAR ALL COLOURS</button>
             </div>
         </div>
-        <div class="red">
-        </div>
-    </div>
+    </main>
 
 
 

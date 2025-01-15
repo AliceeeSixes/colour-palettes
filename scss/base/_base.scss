@@ -1,5 +1,24 @@
+html {
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
 body {
     margin: 0;
     padding: 0;
+    position: relative;
+    height: 100vh;
+}
+
+div, h1 {
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
