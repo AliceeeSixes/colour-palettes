@@ -23,7 +23,7 @@ function newColour(rgb) {
     let html = ``;
 
     // Initialise new DOM element
-    let $newColour = $(`<div></div>`).addClass("colour-tile").css("background-color",rgb);
+    let $newColour = $(`<div></div>`).addClass("colour-tile").css("background-color",rgb).css("color",opposite);
 
     // HTML for buttons
     let addOppositeButton = `<button class="add-opposite">Add opposite colour</button>`;
@@ -57,6 +57,7 @@ function newColour(rgb) {
         $(container).find(".add-opposite").css("background-color",opposite).css("color",rgb);
         $(container).find(".add-lighter").css("background-color",lighter).css("color",opposite);
         $(container).find(".add-darker").css("background-color",darker).css("color",opposite);
+        $(container).css("color",opposite);
     });
 
 
@@ -95,11 +96,18 @@ function invert(red, green, blue) {
 
 
 // Buttons create new tiles
-$("#main__container-contents").on("click","button", (event) => {
+$("#main__container-contents").on("click","button.add-opposite", (event) => {
     let colour = $(event.target).css("background-color");
     newColour(colour);
 });
-
+$("#main__container-contents").on("click","button.add-lighter", (event) => {
+    let colour = $(event.target).css("background-color");
+    newColour(colour);
+});
+$("#main__container-contents").on("click","button.add-darker", (event) => {
+    let colour = $(event.target).css("background-color");
+    newColour(colour);
+});
 
 // Lighten function
 
