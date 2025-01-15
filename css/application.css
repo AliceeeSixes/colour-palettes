@@ -1,0 +1,26 @@
+body {
+  margin: 0;
+  padding: 0; }
+
+.green {
+  background: green;
+  height: 15vh;
+  position: sticky;
+  top: 0; }
+
+.blue {
+  background: blue;
+  height: 85vh; }
+
+.red {
+  background: red;
+  height: 85vh; }
+
+.page-grid {
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  display: grid;
+  background: purple; }
+
+/*# sourceMappingURL=application.css.map */
