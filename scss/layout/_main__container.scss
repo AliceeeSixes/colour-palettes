@@ -24,10 +24,11 @@
     bottom: 0;
     background: grey;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     button {
         height: 5vh;
         align-self: center;
+        margin: 10%;
     }
 }
 #main__container-contents {
@@ -36,6 +37,7 @@
     background: #b4b4b4;
     align-self: center;
     display: flex;
+    flex-wrap: wrap;
     &::after {
         content: "No Colour Tiles Created";
         display: block;

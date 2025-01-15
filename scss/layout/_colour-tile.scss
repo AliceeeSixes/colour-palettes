@@ -1,6 +1,7 @@
 .colour-tile {
     flex: 1 1 0;
-    height: 100%;
+    flex-basis: 15%;
+    max-height: 100%;
     border: 2px solid black;
     position: relative;
     z-index: 2;
@@ -30,6 +31,38 @@
 .colour-tile-text {
     text-align: center;
     width: 100%;
-    height: 30vh;
+    height: fit-content;
     align-self: center;
+}
+
+input {
+    background-color: transparent;
+    border: none;
+    font-size: 1em;
+    border-bottom: 1px solid grey;
+    width: 3em;
+    ::-webkit-inner-spin-button,
+    ::-webkit-outer-spin-button {
+        opacity: 1
+    }
+}
+
+.colour-tile-buttons {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    bottom: 10%;
+}
+.add-opposite {
+    display: block;
+    width: fit-content;
+    position: absolute;
+    align-self: center;
+
+    padding: 5px;
+    flex-wrap: wrap;
+    border-radius: 5px;
+    border: 2px solid grey;
+
 }
