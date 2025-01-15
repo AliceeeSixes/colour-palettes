@@ -1,22 +1,50 @@
 #main__container {
     background: purple;
-    width: 90vw;
+    width: 100vw;
+    @media (min-width: $break-medium) {
+        width: 90vw;
+    }
     height: 80vh;
     margin: 5vh auto;
     position: relative;
+    display: flex;
 }
 
 #main__container-topbar {
     position: absolute;
     width: 100%;
-    height: 5vh;
+    height: 10vh;
     top: 0;
     background: grey;
 }
 #main__container-bottombar {
     position: absolute;
     width: 100%;
-    height: 5vh;
+    height: 10vh;
     bottom: 0;
     background: grey;
+    display: flex;
+    justify-content: space-around;
+    button {
+        height: 5vh;
+        align-self: center;
+    }
+}
+#main__container-contents {
+    height: 60vh;
+    width: 100%;
+    background: #b4b4b4;
+    align-self: center;
+    display: flex;
+    &::after {
+        content: "No Colour Tiles Created";
+        display: block;
+        position: absolute;
+        height: 60vh;
+        width: 100%;
+        text-align: center;
+        align-content: center;
+        font-size: 3em;
+    }
+
 }
