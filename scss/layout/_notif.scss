@@ -1,0 +1,16 @@
+.notif {
+    position: absolute;
+    min-width: 200px;
+    width: fit-content;
+    height: 50px;
+    background: #b4ffb1;
+    top: 20px;
+    align-self: center;
+    z-index: 50;
+    text-align: center;
+    align-content: center;
+    border-radius: 5px;
+    border: 2px solid $offblack;
+
+
+}

@@ -25,14 +25,18 @@ function newColour(rgb) {
     // Initialise new DOM element
     let $newColour = $(`<div></div>`).addClass("colour-tile").css("background-color",rgb).css("color",opposite);
 
-    // HTML for buttons
+    // HTML for addition buttons
     let addOppositeButton = `<button class="add-opposite">Add opposite colour</button>`;
     let addDarkerButton = `<button class="add-darker">Add 10% darker</button>`;
     let addLighterButton = `<button class="add-lighter">Add 10% lighter</button>`;
     let buttons = `<div class="colour-tile-buttons">`+addDarkerButton+addOppositeButton+addLighterButton+`</div>`;
 
+    // HTML for copy buttons
+    let copyRGB = `<button class="copy-rgb">Copy RGB</button>`;
+    let copyHex = `<button class="copy-hex">Copy Hex</button>`;
+    let copyButtons = copyRGB + "<br>" + copyHex;
 
-    html += `<button class="colour-tile-delete">Remove</button><div class="colour-tile-text"><form><h2>Red: `+red+`</h2><h2>Green: `+green+`</h2><h2>Blue: `+blue+`</h2></form></div>`+buttons;
+    html += `<button class="colour-tile-delete">Remove</button><div class="colour-tile-text"><form><h2>Red: `+red+`</h2><h2>Green: `+green+`</h2><h2>Blue: `+blue+`</h2></form>`+copyButtons+`</div>`+buttons;
 
 
     $newColour.html(html);
@@ -40,6 +44,8 @@ function newColour(rgb) {
     $($newColour).find(".add-opposite").css("background-color",opposite).css("color",rgb);
     $($newColour).find(".add-lighter").css("background-color",lighter).css("color",opposite);
     $($newColour).find(".add-darker").css("background-color",darker).css("color",opposite);
+    $($newColour).find(".copy-rgb").text(rgb).css("color",opposite);
+    $($newColour).find(".copy-hex").text(rgbToHex(rgb)).css("color",opposite);
 
     // Size inputs correctly
     let redLen = $($newColour).find(".red").val().length;
@@ -58,7 +64,7 @@ function newColour(rgb) {
         let opposite = invert(red, green, blue);
         let lighter = rgbLighten(red, green, blue);
         let darker = rgbDarken(red, green, blue);
-        let rgb = `rgb(`+red+`,`+green+`,`+blue+`)`;
+        let rgb = `rgb(`+red+`, `+green+`, `+blue+`)`;
         container.css("background-color",rgb);
         let newText = `rgb(`+red+`, `+green+`, `+blue+`)`;
         $(container).find("h1").text(newText);
@@ -75,6 +81,10 @@ function newColour(rgb) {
         $(container).find(".green").css("width",(15 * greenLen + 15));
         let blueLen = $(container).find(".blue").val().length;
         $(container).find(".blue").css("width",(15 * blueLen + 15));
+
+        // Update RGB/Hex labels based on input values
+        $(container).find(".copy-rgb").text(rgb).css("color",opposite);
+        $(container).find(".copy-hex").text(rgbToHex(rgb)).css("color",opposite);
     });
 
 
@@ -126,6 +136,21 @@ $("#main__container-contents").on("click","button.add-darker", (event) => {
     newColour(colour);
 });
 
+// Copy value buttons
+$("#main__container-contents").on("click","button.copy-rgb", (event) => {
+    console.log("copy rgb");
+    let colour = $(event.target).parents(".colour-tile").css("background-color");
+    copyRgb(colour);
+
+});
+
+$("#main__container-contents").on("click","button.copy-hex", (event) => {
+    console.log("copy hex");
+    let colour = $(event.target).parents(".colour-tile").css("background-color");
+    copyHex(colour);
+});
+
+
 // Lighten function
 
 function rgbLighten(red, green, blue) {
@@ -175,6 +200,21 @@ function closePopup() {
 closePopup();
 
 
+// Notif
+
+function notif(message) {
+    // Display Message
+    $(".notif").text(message);
+
+    // Show notif
+    $(".notif").fadeIn(100).delay(1500).fadeOut(100);
+
+
+
+}
+
+$(".notif").hide();
+
 // Export palette as string
 
 function exportAsString() {
@@ -219,4 +259,53 @@ function generateFromString() {
         newColour(importString[(index)]);
     }
     closePopup();
+}
+
+// RGB to Hex function
+function rgbToHex(rgb) {
+    let colours = rgb.slice(4,-1).split(", ");
+    let red = colours[0];
+    let green = colours[1];
+    let blue = colours[2];
+
+    let redHex = parseInt(red).toString(16);
+    while (redHex.length < 2) {
+        redHex = "0" + redHex;
+    }
+    let greenHex = parseInt(green).toString(16);
+    while (greenHex.length < 2) {
+        greenHex = "0" + greenHex;
+    }
+    let blueHex = parseInt(blue).toString (16);
+    while (blueHex.length < 2) {
+        blueHex = "0" + blueHex;
+    }
+
+    newHex = "#"+redHex+greenHex+blueHex;
+    return(newHex);
+
+
+}
+
+// Copy RGB to clipboard
+
+function copyRgb(rgb) {
+    let copyText = rgb;
+    navigator.clipboard.writeText(copyText);
+
+    // Copy notification
+    notif("Copied to clipboard!");
+    
+}
+
+
+// Copy Hex to clipboard
+
+function copyHex(rgb) {
+    let copyText = rgbToHex(rgb);
+    navigator.clipboard.writeText(copyText);
+
+    // Copy notification
+    notif("Copied to clipboard!");
+    
 }
