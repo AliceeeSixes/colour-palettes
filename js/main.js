@@ -32,7 +32,7 @@ function newColour(rgb) {
     let buttons = `<div class="colour-tile-buttons">`+addDarkerButton+addOppositeButton+addLighterButton+`</div>`;
 
 
-    html += `<button class="colour-tile-delete">Remove</button><div class="colour-tile-text"><h1>`+rgb+`</h1><form><h2>Red: `+red+`</h2><h2>Green: `+green+`</h2><h2>Blue: `+blue+`</h2></form></div>`+buttons;
+    html += `<button class="colour-tile-delete">Remove</button><div class="colour-tile-text"><form><h2>Red: `+red+`</h2><h2>Green: `+green+`</h2><h2>Blue: `+blue+`</h2></form></div>`+buttons;
 
 
     $newColour.html(html);
@@ -137,3 +137,67 @@ function clearColours() {
     $(".colour-tile").remove();
 }
 
+// Popup
+
+function popup(message) {
+    // Display Message
+    if (message) {
+        $(".popup-inner textarea").val(message);
+        $(".popup-outer").show();
+    } else {
+        $(".popup-inner textarea").val("");
+        $(".popup-outer").show();
+    }
+    // Recieve Input
+}
+
+function closePopup() {
+    $(".popup-outer").hide();
+}
+
+closePopup();
+
+
+// Export palette as string
+
+function exportAsString() {
+    let exportString = ``;
+    let $tiles = $(".colour-tile");
+    $tiles.each((index) => {
+        exportString += $tiles[index].style.backgroundColor;
+        exportString += `%`
+    });
+    $(".copy-text").show();
+    $(".import-string").hide();
+    $(".popup-inner p").text(`Your string is:`);
+    popup(exportString);
+}
+
+// Copy to clipboard
+
+function copyToClipboard() {
+    let copyText = $("#string").val();
+    navigator.clipboard.writeText(copyText);
+}
+
+
+
+// Import palette from string
+
+function importFromString() {
+    $(".copy-text").hide();
+    $(".import-string").show();
+    $(".popup-inner p").text(`Input string:`);
+    popup();
+    console.log(".");
+}
+
+function generateFromString() {
+    let importString = $("#string").val();
+    importString = importString.split("%");
+    importString.pop();
+    for (let index in importString) {
+        newColour(importString[(index)]);
+    }
+    closePopup();
+}

@@ -25,9 +25,26 @@
             <div id="main__container-options">
                 <button onclick="newColour(randomRGB())">ADD NEW RANDOM COLOUR</button>
                 <button onclick="clearColours()">CLEAR ALL COLOURS</button>
+                <button onclick="exportAsString()">EXPORT AS STRING</button>
+                <button onclick="importFromString()">IMPORT STRING</button>
             </div>
         </div>
     </main>
+
+    <div class="popup-outer">
+
+        <div class="popup">
+            <button class="close" onclick="closePopup()"><i class="fa fa-x"></i></button>
+            <div class="popup-inner">
+                <p>Text goes here</p>
+                <!-- Output Strings -->
+                <textarea value="Input goes here" id="string"></textarea>
+                <button class="copy-text" onclick="copyToClipboard()">Copy to clipboard</button>
+                <button class="import-string" onclick="generateFromString()">Import string</button>
+            </div>
+        </div>
+
+    </div>
 
 
 
