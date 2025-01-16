@@ -207,7 +207,7 @@ function notif(message) {
     $(".notif").text(message);
 
     // Show notif
-    $(".notif").fadeIn(100).delay(1500).fadeOut(100);
+    $(".notif").fadeIn(200).delay(1500).fadeOut(200);
 
 
 
