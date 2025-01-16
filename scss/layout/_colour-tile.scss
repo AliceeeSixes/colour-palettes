@@ -44,8 +44,10 @@ input {
     border: none;
     font-size: 1em;
     flex: 1;
-    width: 50px;
+    width: auto;
     color: inherit;
+    text-align: center;
+    padding-left: 0;
     ::-webkit-inner-spin-button,
     ::-webkit-outer-spin-button {
         opacity: 1

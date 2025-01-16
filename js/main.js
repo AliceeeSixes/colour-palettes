@@ -41,6 +41,14 @@ function newColour(rgb) {
     $($newColour).find(".add-lighter").css("background-color",lighter).css("color",opposite);
     $($newColour).find(".add-darker").css("background-color",darker).css("color",opposite);
 
+    // Size inputs correctly
+    let redLen = $($newColour).find(".red").val().length;
+    $($newColour).find(".red").css("width",(15 * redLen + 15));
+    let greenLen = $($newColour).find(".green").val().length;
+    $($newColour).find(".green").css("width",(15 * greenLen + 15));
+    let blueLen = $($newColour).find(".blue").val().length;
+    $($newColour).find(".blue").css("width",(15 * blueLen + 15));
+
     // Colour Tiles update backgrounds
     $newColour.on("input",(event) => {
         let container = $(event.target).parents(".colour-tile");
@@ -58,6 +66,15 @@ function newColour(rgb) {
         $(container).find(".add-lighter").css("background-color",lighter).css("color",opposite);
         $(container).find(".add-darker").css("background-color",darker).css("color",opposite);
         $(container).css("color",opposite);
+
+
+        // Resize inputs based on value
+        let redLen = $(container).find(".red").val().length;
+        $(container).find(".red").css("width",(15 * redLen + 15));
+        let greenLen = $(container).find(".green").val().length;
+        $(container).find(".green").css("width",(15 * greenLen + 15));
+        let blueLen = $(container).find(".blue").val().length;
+        $(container).find(".blue").css("width",(15 * blueLen + 15));
     });
 
 
