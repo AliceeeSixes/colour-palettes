@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Alice's Tiles</title>
 
 
     <link rel="stylesheet" href="css/application.css" />
@@ -27,10 +27,10 @@
             <div id="main__container-contents">
             </div>
             <div id="main__container-options">
-                <button onclick="newColour(randomRGB())">ADD NEW<br>RANDOM COLOUR</button>
-                <button onclick="clearColours()">CLEAR ALL<br>COLOURS</button>
-                <button onclick="exportAsString()">EXPORT<br>AS STRING</button>
-                <button onclick="importFromString()">IMPORT<br>FROM STRING</button>
+                <button onclick="newColour(randomRGB())">ADD NEW<br>RANDOM TILE<br><i class="fa fa-plus"></i></button>
+                <button onclick="clearColours()">CLEAR ALL<br>TILES<br><i class="fa fa-xmark"></i></button>
+                <button onclick="exportAsString()">EXPORT<br>AS STRING<br><i class="fa fa-file-export"></i></button>
+                <button onclick="importFromString()">IMPORT<br>FROM STRING<br><i class="fa fa-file-import"></i></button>
             </div>
         </div>
     </main>
@@ -38,13 +38,13 @@
     <div class="popup-outer">
 
         <div class="popup">
-            <button class="close" onclick="closePopup()"><i class="fa fa-x"></i></button>
+            <button class="close" onclick="closePopup()"><i class="fa fa-xmark"></i></button>
             <div class="popup-inner">
                 <p>Text goes here</p>
                 <!-- Output Strings -->
                 <textarea value="Input goes here" id="string"></textarea>
-                <button class="copy-text" onclick="copyToClipboard()">Copy to clipboard</button>
-                <button class="import-string" onclick="generateFromString()">Import string</button>
+                <button class="copy-text" onclick="copyToClipboard()"><i class="fa fa-copy"></i> Copy to clipboard</button>
+                <button class="import-string" onclick="generateFromString()">Generate palette from string</button>
             </div>
         </div>
 

@@ -184,6 +184,7 @@ function exportAsString() {
         exportString += $tiles[index].style.backgroundColor;
         exportString += `%`
     });
+    $(".copy-text").html(`<i class="fa fa-copy"></i> Copy to clipboard`);
     $(".copy-text").show();
     $(".import-string").hide();
     $(".popup-inner p").text(`Your string is:`);
@@ -195,6 +196,7 @@ function exportAsString() {
 function copyToClipboard() {
     let copyText = $("#string").val();
     navigator.clipboard.writeText(copyText);
+    $(".copy-text").html(`<i class="fa fa-check"></i> Copy to clipboard`);
 }
 
 
