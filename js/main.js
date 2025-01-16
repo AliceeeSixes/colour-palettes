@@ -11,9 +11,9 @@ function newColour(rgb) {
     let opposite = invert(red, green, blue);
     let lighter = rgbLighten(red, green, blue);
     let darker = rgbDarken(red, green, blue);
-    red = `<input value="`+red+`" class="red" name="red" type="number" max="255"></input>`;
-    green = `<input value="`+green+`" class="green" name="green" type="number" max="255"></input>`;
-    blue = `<input value="`+blue+`" class="blue" name="blue" type="number" max="255"></input>`;
+    red = `<span class="red" contenteditable="true">`+red+`</span>`;
+    green = `<span class="green" contenteditable="true">`+green+`</span>`;
+    blue = `<span class="blue" contenteditable="true">`+blue+`</span>`;
     console.log(colours);
 
 
@@ -36,7 +36,7 @@ function newColour(rgb) {
     let copyHex = `<button class="copy-hex">Copy Hex</button>`;
     let copyButtons = copyRGB + "<br>" + copyHex;
 
-    html += `<button class="colour-tile-delete">Remove</button><div class="colour-tile-text"><form><h2>Red: `+red+`</h2><h2>Green: `+green+`</h2><h2>Blue: `+blue+`</h2></form>`+copyButtons+`</div>`+buttons;
+    html += `<button class="colour-tile-delete">Remove</button><div class="colour-tile-text"><h2>Red: `+red+`</h2><h2>Green: `+green+`</h2><h2>Blue: `+blue+`</h2>`+copyButtons+`</div>`+buttons;
 
 
     $newColour.html(html);
@@ -48,19 +48,19 @@ function newColour(rgb) {
     $($newColour).find(".copy-hex").text(rgbToHex(rgb)).css("color",opposite);
 
     // Size inputs correctly
-    let redLen = $($newColour).find(".red").val().length;
-    $($newColour).find(".red").css("width",(15 * redLen + 15));
-    let greenLen = $($newColour).find(".green").val().length;
-    $($newColour).find(".green").css("width",(15 * greenLen + 15));
-    let blueLen = $($newColour).find(".blue").val().length;
-    $($newColour).find(".blue").css("width",(15 * blueLen + 15));
+    // let redLen = $($newColour).find(".red").text().length;
+    // $($newColour).find(".red").css("width",(15 * redLen + 15));
+    // let greenLen = $($newColour).find(".green").text().length;
+    // $($newColour).find(".green").css("width",(15 * greenLen + 15));
+    // let blueLen = $($newColour).find(".blue").text().length;
+    // $($newColour).find(".blue").css("width",(15 * blueLen + 15));
 
     // Colour Tiles update backgrounds
     $newColour.on("input",(event) => {
         let container = $(event.target).parents(".colour-tile");
-        let red = $(container).find(".red").val();
-        let green = $(container).find(".green").val();
-        let blue = $(container).find(".blue").val();
+        let red = $(container).find(".red").text();
+        let green = $(container).find(".green").text();
+        let blue = $(container).find(".blue").text();
         let opposite = invert(red, green, blue);
         let lighter = rgbLighten(red, green, blue);
         let darker = rgbDarken(red, green, blue);
@@ -75,12 +75,12 @@ function newColour(rgb) {
 
 
         // Resize inputs based on value
-        let redLen = $(container).find(".red").val().length;
-        $(container).find(".red").css("width",(15 * redLen + 15));
-        let greenLen = $(container).find(".green").val().length;
-        $(container).find(".green").css("width",(15 * greenLen + 15));
-        let blueLen = $(container).find(".blue").val().length;
-        $(container).find(".blue").css("width",(15 * blueLen + 15));
+        // let redLen = $(container).find(".red").text().length;
+        // $(container).find(".red").css("width",(15 * redLen + 15));
+        // let greenLen = $(container).find(".green").val().length;
+        // $(container).find(".green").css("width",(15 * greenLen + 15));
+        // let blueLen = $(container).find(".blue").val().length;
+        // $(container).find(".blue").css("width",(15 * blueLen + 15));
 
         // Update RGB/Hex labels based on input values
         $(container).find(".copy-rgb").text(rgb).css("color",opposite);
