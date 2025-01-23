@@ -120,10 +120,12 @@ main {
   .colour-tile h2 {
     font-size: 1.2em; }
   .colour-tile:hover .left-button,
-  .colour-tile:hover .right-button {
+  .colour-tile:hover .right-button,
+  .colour-tile:hover .colour-tile-delete {
     opacity: 0.5; }
     .colour-tile:hover .left-button:hover,
-    .colour-tile:hover .right-button:hover {
+    .colour-tile:hover .right-button:hover,
+    .colour-tile:hover .colour-tile-delete:hover {
       opacity: 1; }
 
 .colour-tile-delete {
@@ -137,8 +139,9 @@ main {
   border: none;
   cursor: pointer;
   padding: 0;
-  font-size: 1.2em;
-  text-align: center; }
+  font-size: 1.5em;
+  text-align: center;
+  opacity: 0; }
 
 .colour-tile-text {
   text-align: center;
