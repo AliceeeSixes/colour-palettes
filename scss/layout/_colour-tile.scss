@@ -13,6 +13,15 @@
     h2 {
         font-size: 1.2em;
     }
+    &:hover {
+        .left-button,
+        .right-button {
+            opacity: 0.5;
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
 }
 
 .colour-tile-delete {
@@ -115,4 +124,27 @@ span {
     &:hover {
         background: rgba(0,0,0,0.1);
     }
+}
+
+.left-button,
+.right-button {
+    background: transparent;
+    position: absolute;
+    height: 50px;
+    align-self: center;
+    border: none;
+    color: inherit;
+    opacity: 0;
+    span {
+        background: transparent;
+    }
+    font-size: 1.2em;
+}
+
+.left-button {
+    left: 0;
+}
+
+.right-button {
+    right: 0;
 }

@@ -119,6 +119,12 @@ main {
     font-size: 1.5em; }
   .colour-tile h2 {
     font-size: 1.2em; }
+  .colour-tile:hover .left-button,
+  .colour-tile:hover .right-button {
+    opacity: 0.5; }
+    .colour-tile:hover .left-button:hover,
+    .colour-tile:hover .right-button:hover {
+      opacity: 1; }
 
 .colour-tile-delete {
   height: 25px;
@@ -192,6 +198,26 @@ span {
   .copy-rgb:hover,
   .copy-hex:hover {
     background: rgba(0, 0, 0, 0.1); }
+
+.left-button,
+.right-button {
+  background: transparent;
+  position: absolute;
+  height: 50px;
+  align-self: center;
+  border: none;
+  color: inherit;
+  opacity: 0;
+  font-size: 1.2em; }
+  .left-button span,
+  .right-button span {
+    background: transparent; }
+
+.left-button {
+  left: 0; }
+
+.right-button {
+  right: 0; }
 
 .popup-outer {
   position: fixed;

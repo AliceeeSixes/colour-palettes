@@ -36,6 +36,11 @@ function newColour(rgb) {
     let copyHex = `<button class="copy-hex">Copy Hex</button>`;
     let copyButtons = copyRGB + "<br>" + copyHex;
 
+    // HTML for move buttons
+    let leftButton = `<button class="left-button"><span class="fa fa-arrow-left"></span></button>`;
+    let rightButton = `<button class="right-button"><span class="fa fa-arrow-right"></span></button>`;
+    buttons += leftButton + rightButton;
+
     html += `<button class="colour-tile-delete">&#10799;</button><div class="colour-tile-text"><h2>Red: `+red+`</h2><h2>Green: `+green+`</h2><h2>Blue: `+blue+`</h2>`+copyButtons+`</div>`+buttons;
 
 
@@ -349,3 +354,24 @@ function copyHex(rgb) {
 for (let i=0; i < 5; i++) {
     newColour(randomRGB());
 }
+
+
+
+// Move tiles
+
+$("#main__container-contents").on("click","button.right-button", (event) => {
+    let $tileToMove = $(event.target).parents(".colour-tile");
+    let $nextTile = $tileToMove.next();
+    if ($nextTile) {
+        $tileToMove.insertAfter($nextTile);
+    }
+});
+
+$("#main__container-contents").on("click","button.left-button", (event) => {
+    let $tileToMove = $(event.target).parents(".colour-tile");
+    let $prevTile = $tileToMove.prev();
+    if ($prevTile) {
+        $tileToMove.insertBefore($prevTile);
+    }
+});
+
