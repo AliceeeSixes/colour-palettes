@@ -16,21 +16,18 @@
 }
 
 .colour-tile-delete {
+    height: 25px;
+    width: 25px;
     position: absolute;
     top: 10px;
     right: 10px;
-    display: flex;
-    align-content: center;
-    text-align: center;
-    padding: 5px;
-    flex-wrap: wrap;
-    background-color: rgb(255, 106, 106);
-    border-radius: 5px;
-    border: 2px solid $offgrey;
+    background: transparent;
+    border-radius: 50%;
+    border: none;
     cursor: pointer;
-    &:hover {
-        background-color: rgb(172, 17, 17);
-    }
+    padding: 0;
+    font-size: 1.2em;
+    text-align: center;
 } 
 
 .colour-tile-text {

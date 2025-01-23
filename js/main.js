@@ -36,7 +36,7 @@ function newColour(rgb) {
     let copyHex = `<button class="copy-hex">Copy Hex</button>`;
     let copyButtons = copyRGB + "<br>" + copyHex;
 
-    html += `<button class="colour-tile-delete">Remove</button><div class="colour-tile-text"><h2>Red: `+red+`</h2><h2>Green: `+green+`</h2><h2>Blue: `+blue+`</h2>`+copyButtons+`</div>`+buttons;
+    html += `<button class="colour-tile-delete">&#10799;</button><div class="colour-tile-text"><h2>Red: `+red+`</h2><h2>Green: `+green+`</h2><h2>Blue: `+blue+`</h2>`+copyButtons+`</div>`+buttons;
 
 
     $newColour.html(html);
@@ -46,6 +46,7 @@ function newColour(rgb) {
     $($newColour).find(".add-darker").css("background-color",darker).css("color",textColour);
     $($newColour).find(".copy-rgb").text(rgb).css("color",textColour);
     $($newColour).find(".copy-hex").text(rgbToHex(rgb)).css("color",textColour);
+    $($newColour).find(".colour-tile-delete").css("color",textColour);
 
     // Size inputs correctly
     // let redLen = $($newColour).find(".red").text().length;
@@ -86,6 +87,7 @@ function newColour(rgb) {
         // Update RGB/Hex labels based on input values
         $(container).find(".copy-rgb").text(rgb).css("color",textColour);
         $(container).find(".copy-hex").text(rgbToHex(rgb)).css("color",textColour);
+        $(container).find(".colour-tile-delete").css("color",textColour);
     });
 
 
@@ -120,7 +122,7 @@ function calculateTextColour(rgb) {
         let cMax = Math.max(r,g,b);
         let cMin = Math.min(r,g,b);
         let L = (cMax + cMin) / 2;
-        if (L > 0.5) {
+        if (L > 0.4) {
             // Return dark text
             return "rgb(14,18,16)";
 
