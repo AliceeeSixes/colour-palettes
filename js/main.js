@@ -1,4 +1,3 @@
-
 // Colour Tile Generation
 
 function newColour(rgb) {
@@ -9,6 +8,7 @@ function newColour(rgb) {
     let green = colours[1];
     let blue = colours[2];
     let opposite = invert(red, green, blue);
+    let textColour = calculateTextColour(rgb);
     let lighter = rgbLighten(red, green, blue);
     let darker = rgbDarken(red, green, blue);
     red = `<span class="red" contenteditable="true">`+red+`</span>`;
@@ -23,7 +23,7 @@ function newColour(rgb) {
     let html = ``;
 
     // Initialise new DOM element
-    let $newColour = $(`<div></div>`).addClass("colour-tile").css("background-color",rgb).css("color",opposite);
+    let $newColour = $(`<div></div>`).addClass("colour-tile").css("background-color",rgb).css("color",textColour);
 
     // HTML for addition buttons
     let addOppositeButton = `<button class="add-opposite">Add opposite colour</button>`;
@@ -41,11 +41,11 @@ function newColour(rgb) {
 
     $newColour.html(html);
     // Colour buttons correctly
-    $($newColour).find(".add-opposite").css("background-color",opposite).css("color",rgb);
-    $($newColour).find(".add-lighter").css("background-color",lighter).css("color",opposite);
-    $($newColour).find(".add-darker").css("background-color",darker).css("color",opposite);
-    $($newColour).find(".copy-rgb").text(rgb).css("color",opposite);
-    $($newColour).find(".copy-hex").text(rgbToHex(rgb)).css("color",opposite);
+    $($newColour).find(".add-opposite").css("background-color",opposite).css("color",calculateTextColour(opposite));
+    $($newColour).find(".add-lighter").css("background-color",lighter).css("color",textColour);
+    $($newColour).find(".add-darker").css("background-color",darker).css("color",textColour);
+    $($newColour).find(".copy-rgb").text(rgb).css("color",textColour);
+    $($newColour).find(".copy-hex").text(rgbToHex(rgb)).css("color",textColour);
 
     // Size inputs correctly
     // let redLen = $($newColour).find(".red").text().length;
@@ -65,13 +65,14 @@ function newColour(rgb) {
         let lighter = rgbLighten(red, green, blue);
         let darker = rgbDarken(red, green, blue);
         let rgb = `rgb(`+red+`, `+green+`, `+blue+`)`;
+        let textColour = calculateTextColour(rgb);
         container.css("background-color",rgb);
         let newText = `rgb(`+red+`, `+green+`, `+blue+`)`;
         $(container).find("h1").text(newText);
-        $(container).find(".add-opposite").css("background-color",opposite).css("color",rgb);
-        $(container).find(".add-lighter").css("background-color",lighter).css("color",opposite);
-        $(container).find(".add-darker").css("background-color",darker).css("color",opposite);
-        $(container).css("color",opposite);
+        $(container).find(".add-opposite").css("background-color",opposite).css("color",calculateTextColour(opposite));
+        $(container).find(".add-lighter").css("background-color",lighter).css("color",textColour);
+        $(container).find(".add-darker").css("background-color",darker).css("color",textColour);
+        $(container).css("color",textColour);
 
 
         // Resize inputs based on value
@@ -83,8 +84,8 @@ function newColour(rgb) {
         // $(container).find(".blue").css("width",(15 * blueLen + 15));
 
         // Update RGB/Hex labels based on input values
-        $(container).find(".copy-rgb").text(rgb).css("color",opposite);
-        $(container).find(".copy-hex").text(rgbToHex(rgb)).css("color",opposite);
+        $(container).find(".copy-rgb").text(rgb).css("color",textColour);
+        $(container).find(".copy-hex").text(rgbToHex(rgb)).css("color",textColour);
     });
 
 
@@ -103,6 +104,38 @@ function randomRGB() {
     return(rgb);
 }
 
+// Calculate text colour
+function calculateTextColour(rgb) {
+        // Extract individual rgb values back out
+        let colours = rgb.slice(4,-1).split(", ");
+        let red = colours[0];
+        let green = colours[1];
+        let blue = colours[2];
+
+
+        // Calculate average saturation
+        let r = red/255;
+        let g = green/255;
+        let b = blue/255;
+        let cMax = Math.max(r,g,b);
+        let cMin = Math.min(r,g,b);
+        let L = (cMax + cMin) / 2;
+        if (L > 0.5) {
+            // Return dark text
+            return "rgb(14,18,16)";
+
+        } else {
+            // Return light text
+            return "rgb(241,237,239)";
+
+        }
+
+
+}
+
+
+
+
 // Colour Tile Deletion
 
 $("#main__container-contents").on("click","button.colour-tile-delete", (event) => {
@@ -117,7 +150,7 @@ function invert(red, green, blue) {
     let newRed = 255-red;
     let newGreen = 255-green;
     let newBlue = 255-blue;
-    let rgb = `rgb(`+newRed+`,`+newGreen+`,`+newBlue+`)`;
+    let rgb = `rgb(`+newRed+`, `+newGreen+`, `+newBlue+`)`;
     return(rgb);
 }
 
@@ -308,4 +341,9 @@ function copyHex(rgb) {
     // Copy notification
     notif("Copied to clipboard!");
     
+}
+
+
+for (let i=0; i < 5; i++) {
+    newColour(randomRGB());
 }
