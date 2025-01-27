@@ -27,9 +27,10 @@ function newColour(rgb) {
 
     // HTML for addition buttons
     let addOppositeButton = `<button class="add-opposite">Add opposite colour</button>`;
+    let addTriadicButton = `<button class="add-triadic">Triadic palette</button>`;
     let addDarkerButton = `<button class="add-darker">Add 10% darker</button>`;
     let addLighterButton = `<button class="add-lighter">Add 10% lighter</button>`;
-    let buttons = `<div class="colour-tile-buttons">`+addDarkerButton+addOppositeButton+addLighterButton+`</div>`;
+    let buttons = `<div class="colour-tile-buttons">`+addDarkerButton+addOppositeButton+addTriadicButton+addLighterButton+`</div>`;
 
     // HTML for copy buttons
     let copyRGB = `<button class="copy-rgb">Copy RGB</button>`;
@@ -94,6 +95,10 @@ function newColour(rgb) {
         $(container).find(".copy-hex").text(rgbToHex(rgb)).css("color",textColour);
         $(container).find(".colour-tile-delete").css("color",textColour);
     });
+
+
+    // Make new element draggable
+    // $newColour.attr("draggable","true");
 
 
 
@@ -375,3 +380,156 @@ $("#main__container-contents").on("click","button.left-button", (event) => {
     }
 });
 
+
+
+// RGB to HSL conversion
+
+function RGBtoHSL(rgb) {
+    // Extract RGB values
+    let colours = rgb.slice(4,-1).split(", ");
+    let red = colours[0];
+    let green = colours[1];
+    let blue = colours[2];
+
+    let r = red/255;
+    let g = green/255;
+    let b = blue/255;
+
+    let max = Math.max(r,g,b);
+    let min = Math.min(r,g,b);
+
+    // Calculate lightness
+    let lum = (max + min) / 2;
+    let hue = null;
+    let sat = null;
+
+    // Calculate hue
+    if (max == min) {
+        hue = 0;
+        sat = 0;
+    } else {
+        // Find chroma
+        let c = max - min;
+
+        // Scale chroma
+        sat = c / (1-Math.abs(2 * lum - 1));
+        switch (max) {
+            case r:
+                hue = (g - b) / c;
+                break;
+            case g:
+                hue = (g - b) / c + 2;
+                break;
+            case b:
+                hue = (g - b) / c + 4;
+                break;
+        }
+
+    }
+    hue = Math.round(hue * 60);
+    sat = Math.round(sat * 100);
+    lum = Math.round(lum * 100);
+
+    while (hue < 0) {
+        hue += 360;
+    }
+
+    return [hue, sat, lum];
+}
+
+
+function HSLtoRGB(hsl) {
+    // Extract HSL
+    let hue = hsl[0];
+    let sat = hsl[1] / 100;
+    let lum = hsl[2] / 100;
+    console.log("HSL:")
+    console.log(hue);
+    console.log(sat);
+    console.log(lum);
+
+
+    let c = (1 - Math.abs(2 * lum - 1)) * sat;
+    let x = c * (1 - Math.abs(hue / 60)%2 - 1);
+    let m = lum - c / 2;
+
+    console.log("CXM:")
+    console.log(c);
+    console.log(x);
+    console.log(m);
+
+    let r = null;
+    let g = null;
+    let b = null;
+
+    if (hue < 60) {
+        r = c;
+        g = x;
+        b = 0;
+    } else if (hue < 120) {
+        r = x;
+        g = c;
+        b = 0;
+    } else if (hue < 180) {
+        r = 0;
+        g = c;
+        b = x;
+
+    } else if (hue < 240) {
+        r = 0;
+        g = x;
+        b = c;
+
+    } else if (hue < 300) {
+        r = x;
+        g = 0;
+        b = c;
+    } else {
+        r = c;
+        g = 0;
+        b = x;
+    }
+    console.log("rgb: ")
+    console.log(r);
+    console.log(g);
+    console.log(b);
+
+    let red = Math.abs((r + m) * 255);
+    let green = Math.abs((g + m) * 255);
+    let blue = Math.abs((b + m) * 255);
+
+    let rgb = `rgb(`+red+`, `+green+`, `+blue+`)`;
+    return rgb;
+}
+
+
+
+
+// Generate triadic palette
+
+function generateTriadic(rgb) {
+        // Extract RGB values
+        let colours = rgb.slice(4,-1).split(", ");
+        let red = colours[0];
+        let green = colours[1];
+        let blue = colours[2];
+
+        // Rotate RGB values
+        let rgb2 = `rgb(`+blue+`, `+red+`, `+green+`)`;
+        let rgb3 = `rgb(`+green+`, `+blue+`, `+red+`)`;
+
+        // Generatre new tiles
+        newColour(rgb2);
+        newColour(rgb3);
+        
+
+}
+
+// Triadic button listener
+
+$("#main__container").on("click","button.add-triadic", (event) => {
+    let rgb = $(event.target).parents(".colour-tile").css("background-color");
+    generateTriadic(rgb);
+    console.log("beep")
+
+});
