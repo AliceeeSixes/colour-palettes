@@ -169,7 +169,8 @@ main {
 
 .add-opposite,
 .add-darker,
-.add-lighter {
+.add-lighter,
+.add-triadic {
   display: block;
   width: fit-content;
   padding: 5px;
@@ -178,6 +179,10 @@ main {
   border: none;
   cursor: pointer; }
 
+.add-triadic {
+  background: rgba(255, 255, 255, 0.2);
+  color: inherit; }
+
 span {
   margin: auto;
   width: fit-content;
@@ -185,7 +190,8 @@ span {
   border-radius: 5px;
   text-align: center; }
   span:hover, span:focus-within {
-    background: rgba(0, 0, 0, 0.1); }
+    background: rgba(0, 0, 0, 0.1);
+    outline: 1px solid rgba(255, 255, 255, 0.2); }
 
 .copy-hex {
   margin-top: 10px; }

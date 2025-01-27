@@ -86,7 +86,8 @@
 }
 .add-opposite,
 .add-darker,
-.add-lighter {
+.add-lighter,
+.add-triadic {
     display: block;
     width: fit-content;
     padding: 5px;
@@ -98,6 +99,11 @@
 }
 
 
+.add-triadic {
+    background: rgba(255,255,255, 0.2);
+    color: inherit;
+}
+
 
 span {
     margin: auto;
@@ -107,6 +113,7 @@ span {
     &:hover,
     &:focus-within {
         background: rgba(0,0,0,0.1);
+        outline: 1px solid rgba(255,255,255,0.2);
     }
     text-align: center;
 }
